@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#f0f6f4"
+             x:Class="TravelBlog.MainPage">
+    <ScrollView>
+        <VerticalStackLayout 
+            Padding="30,0"
+            Spacing="25">
+            <StackLayout
+                x:Name="LoginView">
+                <Image
+                    Source="translate.png"
+                    HeightRequest="250"
+                    Aspect="AspectFit"
+                    SemanticProperties.Description="Welcome to TravelBlog!" />
+
+                <Label 
+                    x:Name="AppNameLbl"
+                    Text=""
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Name"
+                    FontSize="12"
+                    TextColor="Black"
+                    HorizontalOptions="Center" />
+
+                <Label 
+                    x:Name="AppPackageLbl"
+                    Text=""
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Package"
+                    FontSize="12"
+                    TextColor="Black"
+                    HorizontalOptions="Center" />
+
+                <Label 
+                    x:Name="AppVersionLbl"
+                    Text=""
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Version"
+                    FontSize="12"
+                    TextColor="Black"
+                    HeightRequest="50"
+                    HorizontalOptions="Center" />
+
+                <Button 
+                    x:Name="LoginBtn"
+                    Text="Log In"
+                    BackgroundColor="DarkOliveGreen"
+                    TextColor="White"
+                    SemanticProperties.Hint="Click to log in"
+                    Clicked="OnLoginClicked"
+                    HeightRequest="50"
+                    HorizontalOptions="Center" />
+            </StackLayout>
+            <StackLayout
+                x:Name="HomeView" IsVisible="false">
+
+                <Image
+                    x:Name="UserPictureImg"
+                    SemanticProperties.Description="Users picture"
+                    HeightRequest="200"
+                    HorizontalOptions="Center" />
+
+                <VerticalStackLayout
+                      Padding="6"
+                      Spacing="6">
+                    <Label 
+                        x:Name="UsernameLbl"
+                        Text=""
+                        TextColor="Black"
+                        SemanticProperties.HeadingLevel="Level2"
+                        SemanticProperties.Description="User's name"
+                        FontSize="18"
+                        HorizontalOptions="Center" />
+
+                    <Label 
+                        x:Name="UsernameProfilesLbl"
+                        Text=""
+                        TextColor="Black"
+                        SemanticProperties.HeadingLevel="Level2"
+                        SemanticProperties.Description="User profiles"
+                        FontSize="18"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+
+                    <Button 
+                        x:Name="LogoutBtn"
+                        Text="Log Out"
+                        SemanticProperties.Hint="Click to log out"
+                        Clicked="OnLogoutClicked"
+                    BackgroundColor="DarkOliveGreen"
+                    TextColor="White"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+
+                    <Button 
+                        x:Name="PurchaseHistoryBtn"
+                        Text="View pruchases"
+                        SemanticProperties.Hint="Click to view purchases' history"
+                        Clicked="OnPurchaseHistoryClicked"
+                    BackgroundColor="DarkOliveGreen"
+                    TextColor="White"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+
+                    <Button 
+                        x:Name="PurchaseSubscriptionBtn"
+                        Text="Subscription Consumable"
+                        SemanticProperties.Hint="Click to purchase"
+                        Clicked="OnPurchaseSubscriptionClicked"
+                    BackgroundColor="DarkOliveGreen"
+                    TextColor="White"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+
+                    <Button 
+                        x:Name="PurchaseSubscriptionNRBtn"
+                        Text="Subscription Not Renewable"
+                        SemanticProperties.Hint="Click to purchase"
+                        Clicked="OnPurchaseSubscriptionNRClicked"
+                    BackgroundColor="DarkOliveGreen"
+                    TextColor="White"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+
+                    <Button 
+                        x:Name="PurchaseConsumableBtn"
+                        Text="IAP Consumable"
+                        SemanticProperties.Hint="Click to purchase"
+                        Clicked="OnPurchaseConsumableClicked"
+                    BackgroundColor="DarkOliveGreen"
+                    TextColor="White"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+
+                    <Button 
+                        x:Name="PurchaseNonConsumableBtn"
+                        Text="IAP Non Consumable"
+                        SemanticProperties.Hint="Click to purchase"
+                        Clicked="OnPurchaseNonConsumableClicked"
+                    BackgroundColor="DarkOliveGreen"
+                    TextColor="White"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+
+                    <Editor x:Name="PurchaseList"
+                    BackgroundColor="DarkOliveGreen"
+                        Placeholder="Your purchase list"
+                        HeightRequest="250" />
+                </VerticalStackLayout>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
