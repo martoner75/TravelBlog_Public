@@ -95,10 +95,10 @@
                         HorizontalOptions="Center" />
 
                     <Button 
-                        x:Name="PurchaseHistoryBtn"
-                        Text="View pruchases"
-                        SemanticProperties.Hint="Click to view purchases' history"
-                        Clicked="OnPurchaseHistoryClicked"
+                        x:Name="SyncPurchaseHistoryBtn"
+                        Text="Sync purchases"
+                        SemanticProperties.Hint="Click to sync purchases"
+                        Clicked="OnSyncPurchaseHistoryClicked"
                     BackgroundColor="DarkOliveGreen"
                     TextColor="White"
                         HeightRequest="50"

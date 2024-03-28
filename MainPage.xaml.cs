@@ -10,6 +10,7 @@ namespace TravelBlog
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IInAppPurchaseService _inAppPurchaseService;
+        private readonly IBaseRepository _baseRepository;
         private readonly Settings _settings;
         private readonly string _appName = AppInfo.Current.Name;
         private readonly string _appPackage = AppInfo.Current.PackageName;
@@ -19,11 +20,13 @@ namespace TravelBlog
         public MainPage(
             IAuthenticationService authenticationService,
             IInAppPurchaseService inAppPurchaseService,
+            IBaseRepository baseRepository,
             Settings settings)
         {
             InitializeComponent();
             _authenticationService = authenticationService;
             _inAppPurchaseService = inAppPurchaseService;
+            _baseRepository = baseRepository;
             _settings = settings;
             AppNameLbl.Text = _appName;
             AppPackageLbl.Text = _appPackage;
@@ -68,16 +71,31 @@ namespace TravelBlog
                 await DisplayAlert("Error", "There was an error while logging off, please try later.", "OK");
         }
 
-        private async void OnPurchaseHistoryClicked(
+        private async void OnSyncPurchaseHistoryClicked(
             object sender,
             EventArgs e)
         {
-            var result = await _inAppPurchaseService.GetAllPurchasesAsync();
+            var purchasesFromStore = await _inAppPurchaseService.GetAllPurchasesAsync();
 
-            if(result.Any())
-                PurchaseList.Text =  JsonSerializer.Serialize(result);
-            else
+            if (purchasesFromStore.Any())
+            {
+                foreach (var purchase in purchasesFromStore)
+                {
+                    await _baseRepository.SaveItemAsync(
+                        new PurchaseDBModel() 
+                        { 
+                            ProductId = purchase._productId,
+                            PurchaseType = purchase._purchaseType.ToString()
+                        });
+                }
+            }
+
+            var storedPurchases = await _baseRepository.GetItemsAsync();
+
+            if (!storedPurchases.Any())
                 await DisplayAlert("Information", "No purchases so far!", "OK");
+            else
+                PurchaseList.Text = JsonSerializer.Serialize(storedPurchases);
         }
 
         private async void OnPurchaseSubscriptionClicked(

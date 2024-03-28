@@ -40,64 +40,64 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
-	  <CodesignKey>iPhone Developer</CodesignKey>
-	  <CodesignProvision>VS: it.rossdev.travelblog Development</CodesignProvision>
+	  <CodesignKey>Apple Distribution: Rosario Martone (L4CHLLNW77)</CodesignKey>
+	  <CodesignProvision>it.rossdev.travelblog Distribution</CodesignProvision>
 	  <ProvisioningType>manual</ProvisioningType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.8</ApplicationDisplayVersion>
-	  <ApplicationVersion>18</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
@@ -140,6 +140,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Plugin.InAppBilling" Version="7.1.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
 		<PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
 	</ItemGroup>
 
