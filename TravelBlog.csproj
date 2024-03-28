@@ -47,56 +47,56 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.11</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>

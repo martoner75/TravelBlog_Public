@@ -82,13 +82,20 @@ namespace TravelBlog
                 foreach (var purchase in purchasesFromStore)
                 {
                     await _baseRepository.SaveItemAsync(
-                        new PurchaseDBModel() 
-                        { 
+                        new PurchaseDBModel()
+                        {
                             ProductId = purchase._productId,
                             PurchaseType = purchase._purchaseType.ToString()
                         });
                 }
             }
+            else
+                await _baseRepository.SaveItemAsync(
+                        new PurchaseDBModel()
+                        {
+                            ProductId = "TravelBlogFREE",
+                            PurchaseType = "Free"
+                        });
 
             var storedPurchases = await _baseRepository.GetItemsAsync();
 
