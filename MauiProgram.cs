@@ -48,6 +48,7 @@ namespace TravelBlog
             builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
             builder.Services.AddSingleton<IInAppPurchaseService, InAppPurchaseService>();
             builder.Services.AddSingleton<IBaseRepository, BaseRepository>();
+            builder.Services.AddSingleton<IRepositoryService, RepositoryService>();
 
             return builder.Build();
         }

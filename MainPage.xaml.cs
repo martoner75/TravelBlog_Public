@@ -1,7 +1,6 @@
 ﻿using IdentityModel.OidcClient.Browser;
 using Plugin.InAppBilling;
 using System.Text.Json;
-using TravelBlog.Helpers;
 using TravelBlog.Models;
 using TravelBlog.Services;
 
@@ -11,7 +10,7 @@ namespace TravelBlog
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IInAppPurchaseService _inAppPurchaseService;
-        private readonly IBaseRepository _baseRepository;
+        private readonly IRepositoryService _repositoryService;
         private readonly Settings _settings;
         private readonly string _appName = AppInfo.Current.Name;
         private readonly string _appPackage = AppInfo.Current.PackageName;
@@ -21,13 +20,13 @@ namespace TravelBlog
         public MainPage(
             IAuthenticationService authenticationService,
             IInAppPurchaseService inAppPurchaseService,
-            IBaseRepository baseRepository,
+            IRepositoryService repositoryService,
             Settings settings)
         {
             InitializeComponent();
             _authenticationService = authenticationService;
             _inAppPurchaseService = inAppPurchaseService;
-            _baseRepository = baseRepository;
+            _repositoryService = repositoryService;
             _settings = settings;
             AppNameLbl.Text = _appName;
             AppPackageLbl.Text = _appPackage;
@@ -78,72 +77,10 @@ namespace TravelBlog
         {
             var purchasesFromStore = await _inAppPurchaseService.GetAllPurchasesAsync();
 
-            PurchaseList.Text = $"{JsonSerializer.Serialize(purchasesFromStore)}\r\n";
-
             if (purchasesFromStore.Any())
-            {
-                foreach (var purchase in purchasesFromStore)
-                {
-                    var productId = await _baseRepository.SaveItemAsync(
-                        new PurchaseDBModel()
-                        {
-                            ProductId = purchase._productId,
-                            PurchaseType = purchase._purchaseType
-                        });
+                await _repositoryService.StorePurchases(purchasesFromStore);
 
-                    PurchaseList.Text += $"Adding product {productId}: {purchase._productId}/{purchase._purchaseType}\r\n";
-
-                    foreach (var purchaseDetail in purchase.PurchaseItems)
-                    {
-                        var itemAdded = await _baseRepository.SaveItemDetailAsync(
-                            new PurchaseDBModelDetail()
-                            {
-                                PurchaseModelId = productId,
-                                PurchaseId = purchaseDetail.Id,
-                                IsAcknowledged = purchaseDetail.IsAcknowledged != null ? purchaseDetail.IsAcknowledged : false,
-                                TransactionDateUtc = purchaseDetail.TransactionDateUtc,
-                                AutoRenewing = purchaseDetail.AutoRenewing
-                            });
-                        PurchaseList.Text += $"Adding product detail {itemAdded} for product {productId}: {purchaseDetail.Id}/{purchaseDetail.TransactionDateUtc}/{purchaseDetail.IsAcknowledged} of type: {purchaseDetail.AutoRenewing}\r\n";
-                    }
-                }
-            }
-            else
-            {
-                var productId = await _baseRepository.SaveItemAsync(
-                        new PurchaseDBModel()
-                        {
-                            Id = 1,
-                            ProductId = _settings.FreeProductName,
-                            PurchaseType = ItemType.InAppPurchase
-                        });
-
-                PurchaseList.Text += $"Adding free subscription {productId}: {_settings.FreeProductId}/{ItemType.InAppPurchase}\r\n";
-
-                var detaildId = await _baseRepository.SaveItemDetailAsync(
-                        new PurchaseDBModelDetail()
-                        {
-                            Id = 1,
-                            PurchaseModelId = productId,
-                            PurchaseId = _settings.FreeProductId,
-                            IsAcknowledged = true,
-                            TransactionDateUtc = DateTime.Now.ToUniversalTime(),
-                            AutoRenewing = false
-                        });
-
-                PurchaseList.Text += $"Adding details for free subscription {detaildId}\r\n";
-            }
-
-            var result = new List<PurchaseDBModelResponse>();
-
-            var storedPurchases = await _baseRepository.GetItemsAsync();
-            var storedPurchaseDetailss = await _baseRepository.GetItemsDetailsAsync();
-
-            result.AddRange(
-                ProductMapper.GetProductsFromModel(
-                    storedPurchases, 
-                    storedPurchaseDetailss)
-                );
+            var result = await _repositoryService.GetStorePurchases();
 
             if (!result.Any())
                 await DisplayAlert("Information", "No purchases so far!", "OK");
