@@ -21,6 +21,8 @@ namespace TravelBlog.Models
 
         public int PurchaseModelId { get; set; }
 
+        public string PurchaseId { get; set; }
+
         public bool AutoRenewing { get; set; }
 
         public bool? IsAcknowledged { get; set; }

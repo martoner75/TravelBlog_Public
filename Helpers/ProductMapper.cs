@@ -36,6 +36,7 @@ namespace TravelBlog.Helpers
                     AutoRenewing = item.AutoRenewing,
                     IsAcknowledged = item.IsAcknowledged,
                     PurchaseModelId = item.PurchaseModelId,
+                    PurchaseId = item.PurchaseId,
                     TransactionDateUtc = item.TransactionDateUtc
                 });
             }

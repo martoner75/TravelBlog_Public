@@ -39,11 +39,11 @@ namespace TravelBlog.Services
                 await _billing.DisconnectAsync();
             }
 
-            return purchaseResult.Where(x=>x.PurchaseItems.Any(y=>y.State == PurchaseState.Purchased));
+            return purchaseResult.Where(x => x.PurchaseItems.Any(y => y.State == PurchaseState.Purchased));
         }
 
         public async Task<IEnumerable<PurchaseModel>> GetPurchaseByProductIdAsync(
-            ItemType type, 
+            ItemType type,
             string productId)
         {
             var purchaseResult = new List<PurchaseModel>();
@@ -88,7 +88,7 @@ namespace TravelBlog.Services
 
                 if (purchase == null)
                     purchaseResult.Errors.ToList().Add("There was an error while purchasing this product");
-                else if (purchase.State == Plugin.InAppBilling.PurchaseState.Purchased)
+                else if (purchase.State == PurchaseState.Purchased)
                 {
                     var ack = await CrossInAppBilling.Current.FinalizePurchaseAsync(purchase.TransactionIdentifier);
 

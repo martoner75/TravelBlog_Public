@@ -78,6 +78,8 @@ namespace TravelBlog
         {
             var purchasesFromStore = await _inAppPurchaseService.GetAllPurchasesAsync();
 
+            PurchaseList.Text = $"{JsonSerializer.Serialize(purchasesFromStore)}\r\n";
+
             if (purchasesFromStore.Any())
             {
                 foreach (var purchase in purchasesFromStore)
@@ -89,16 +91,20 @@ namespace TravelBlog
                             PurchaseType = purchase._purchaseType
                         });
 
-                    foreach(var purchaseDetail in purchase.PurchaseItems)
+                    PurchaseList.Text += $"Adding product {productId}: {purchase._productId}/{purchase._purchaseType}\r\n";
+
+                    foreach (var purchaseDetail in purchase.PurchaseItems)
                     {
-                        await _baseRepository.SaveItemDetailAsync(
+                        var itemAdded = await _baseRepository.SaveItemDetailAsync(
                             new PurchaseDBModelDetail()
                             {
                                 PurchaseModelId = productId,
-                                IsAcknowledged = purchaseDetail.IsAcknowledged,
+                                PurchaseId = purchaseDetail.Id,
+                                IsAcknowledged = purchaseDetail.IsAcknowledged != null ? purchaseDetail.IsAcknowledged : false,
                                 TransactionDateUtc = purchaseDetail.TransactionDateUtc,
                                 AutoRenewing = purchaseDetail.AutoRenewing
                             });
+                        PurchaseList.Text += $"Adding product detail {itemAdded} for product {productId}: {purchaseDetail.Id}/{purchaseDetail.TransactionDateUtc}/{purchaseDetail.IsAcknowledged} of type: {purchaseDetail.AutoRenewing}\r\n";
                     }
                 }
             }
@@ -108,19 +114,24 @@ namespace TravelBlog
                         new PurchaseDBModel()
                         {
                             Id = 1,
-                            ProductId = _settings.FreeProductId,
+                            ProductId = _settings.FreeProductName,
                             PurchaseType = ItemType.InAppPurchase
                         });
 
-                await _baseRepository.SaveItemDetailAsync(
+                PurchaseList.Text += $"Adding free subscription {productId}: {_settings.FreeProductId}/{ItemType.InAppPurchase}\r\n";
+
+                var detaildId = await _baseRepository.SaveItemDetailAsync(
                         new PurchaseDBModelDetail()
                         {
                             Id = 1,
                             PurchaseModelId = productId,
+                            PurchaseId = _settings.FreeProductId,
                             IsAcknowledged = true,
                             TransactionDateUtc = DateTime.Now.ToUniversalTime(),
                             AutoRenewing = false
                         });
+
+                PurchaseList.Text += $"Adding details for free subscription {detaildId}\r\n";
             }
 
             var result = new List<PurchaseDBModelResponse>();
@@ -128,12 +139,16 @@ namespace TravelBlog
             var storedPurchases = await _baseRepository.GetItemsAsync();
             var storedPurchaseDetailss = await _baseRepository.GetItemsDetailsAsync();
 
-            result.AddRange(ProductMapper.GetProductsFromModel(storedPurchases, storedPurchaseDetailss));
+            result.AddRange(
+                ProductMapper.GetProductsFromModel(
+                    storedPurchases, 
+                    storedPurchaseDetailss)
+                );
 
             if (!result.Any())
                 await DisplayAlert("Information", "No purchases so far!", "OK");
             else
-                PurchaseList.Text = JsonSerializer.Serialize(result);
+                PurchaseList.Text += $"{JsonSerializer.Serialize(result)}\r\n";
         }
 
         private async void OnPurchaseSubscriptionClicked(

@@ -67,9 +67,11 @@ namespace TravelBlog.Services
             try
             {
                 if(await GetItemAsync(item.ProductId) != null)
-                    return await _repository.UpdateAsync(item);
-                else
-                    return await _repository.InsertAsync(item);
+                    await _repository.DeleteAsync(item);
+
+                await _repository.InsertAsync(item);
+
+                return (await GetItemAsync(item.ProductId)).Id;
             }
             catch (Exception ex)
             {
@@ -84,9 +86,11 @@ namespace TravelBlog.Services
             try
             {
                 if (await GetItemDetailsAsync(item.Id) != null)
-                    return await _repository.UpdateAsync(item);
-                else
-                    return await _repository.InsertAsync(item);
+                    await _repository.DeleteAsync(item);
+
+                await _repository.InsertAsync(item);
+
+                return (await GetItemDetailsAsync(item.Id)).Id;
             }
             catch (Exception ex)
             {

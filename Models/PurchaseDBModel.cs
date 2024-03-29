@@ -38,6 +38,10 @@ namespace TravelBlog.Models
         [NotNull]
         public int PurchaseModelId { get; set; }
 
+        [Column("PurchaseId")]
+        [NotNull]
+        public string PurchaseId { get; set; }
+
         [Column("AutoRenewing")]
         [NotNull]
         public bool AutoRenewing { get; set; }

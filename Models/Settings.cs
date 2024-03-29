@@ -21,5 +21,7 @@
         public string SubscriptionNR { get; set; }
 
         public string FreeProductId { get; set; }
+
+        public string FreeProductName { get; set; }
     }
 }
