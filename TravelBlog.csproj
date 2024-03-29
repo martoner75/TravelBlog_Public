@@ -40,8 +40,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
-	  <CodesignKey>iPhone Distribution</CodesignKey>
-	  <CodesignProvision>it.rossdev.travelblog Distribution</CodesignProvision>
+	  <CodesignKey>Apple Development: Created via API (57GR835SAN)</CodesignKey>
+	  <CodesignProvision></CodesignProvision>
 	  <ProvisioningType>manual</ProvisioningType>
 	</PropertyGroup>
 

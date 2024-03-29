@@ -82,8 +82,8 @@ namespace TravelBlog.Services
                 if (!connected)
                     purchaseResult.Errors.ToList().Add($"There was an error while connecting to the store");
 
-                var productInfo = await _billing.GetProductInfoAsync(type, productId);
-                var purchase = await _billing.PurchaseAsync(productId, type);
+                var productInfo = (await _billing.GetProductInfoAsync(type, productId)).FirstOrDefault();
+                var purchase = await _billing.PurchaseAsync(productInfo.ProductId, type);
                 purchaseResult.purchaseState = purchase.State;
 
                 if (purchase == null)
