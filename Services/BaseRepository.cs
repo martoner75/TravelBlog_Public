@@ -18,6 +18,7 @@ namespace TravelBlog.Services
             try
             {
                 await _repository.CreateTableAsync<PurchaseDBModel>();
+                await _repository.CreateTableAsync<PurchaseDBModelDetail>();
             }
             catch (Exception ex)
             {
@@ -45,6 +46,20 @@ namespace TravelBlog.Services
             return await _repository.Table<PurchaseDBModel>().Where(i => i.ProductId == productId).FirstOrDefaultAsync();
         }
 
+        public async Task<PurchaseDBModelDetail> GetItemDetailsAsync(int productDetailId)
+        {
+            await Init();
+
+            return await _repository.Table<PurchaseDBModelDetail>().Where(i => i.Id == productDetailId).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<PurchaseDBModelDetail>> GetItemDetailsByProductIdAsync(int productId)
+        {
+            await Init();
+
+            return await _repository.Table<PurchaseDBModelDetail>().Where(i => i.PurchaseModelId == productId).ToListAsync();
+        }
+
         public async Task<int> SaveItemAsync(PurchaseDBModel item)
         {
             await Init();
@@ -62,11 +77,42 @@ namespace TravelBlog.Services
             }
         }
 
+        public async Task<int> SaveItemDetailAsync(PurchaseDBModelDetail item)
+        {
+            await Init();
+
+            try
+            {
+                if (await GetItemDetailsAsync(item.Id) != null)
+                    return await _repository.UpdateAsync(item);
+                else
+                    return await _repository.InsertAsync(item);
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
         public async Task<int> DeleteItemAsync(PurchaseDBModel item)
         {
             await Init();
 
             return await _repository.DeleteAsync(item);
+        }
+
+        public async Task<List<PurchaseDBModelDetail>> GetItemsDetailsAsync()
+        {
+            try
+            {
+                await Init();
+
+                return await _repository.Table<PurchaseDBModelDetail>().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return new List<PurchaseDBModelDetail>();
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using IdentityModel.OidcClient.Browser;
 using Plugin.InAppBilling;
 using System.Text.Json;
+using TravelBlog.Helpers;
 using TravelBlog.Models;
 using TravelBlog.Services;
 
@@ -81,28 +82,58 @@ namespace TravelBlog
             {
                 foreach (var purchase in purchasesFromStore)
                 {
-                    await _baseRepository.SaveItemAsync(
+                    var productId = await _baseRepository.SaveItemAsync(
                         new PurchaseDBModel()
                         {
                             ProductId = purchase._productId,
-                            PurchaseType = purchase._purchaseType.ToString()
+                            PurchaseType = purchase._purchaseType
                         });
+
+                    foreach(var purchaseDetail in purchase.PurchaseItems)
+                    {
+                        await _baseRepository.SaveItemDetailAsync(
+                            new PurchaseDBModelDetail()
+                            {
+                                PurchaseModelId = productId,
+                                IsAcknowledged = purchaseDetail.IsAcknowledged,
+                                TransactionDateUtc = purchaseDetail.TransactionDateUtc,
+                                AutoRenewing = purchaseDetail.AutoRenewing
+                            });
+                    }
                 }
             }
             else
-                await _baseRepository.SaveItemAsync(
+            {
+                var productId = await _baseRepository.SaveItemAsync(
                         new PurchaseDBModel()
                         {
-                            ProductId = "TravelBlogFREE",
-                            PurchaseType = "Free"
+                            Id = 1,
+                            ProductId = _settings.FreeProductId,
+                            PurchaseType = ItemType.InAppPurchase
                         });
 
-            var storedPurchases = await _baseRepository.GetItemsAsync();
+                await _baseRepository.SaveItemDetailAsync(
+                        new PurchaseDBModelDetail()
+                        {
+                            Id = 1,
+                            PurchaseModelId = productId,
+                            IsAcknowledged = true,
+                            TransactionDateUtc = DateTime.Now.ToUniversalTime(),
+                            AutoRenewing = false
+                        });
+            }
 
-            if (!storedPurchases.Any())
+            var result = new List<PurchaseDBModelResponse>();
+
+            var storedPurchases = await _baseRepository.GetItemsAsync();
+            var storedPurchaseDetailss = await _baseRepository.GetItemsDetailsAsync();
+
+            result.AddRange(ProductMapper.GetProductsFromModel(storedPurchases, storedPurchaseDetailss));
+
+            if (!result.Any())
                 await DisplayAlert("Information", "No purchases so far!", "OK");
             else
-                PurchaseList.Text = JsonSerializer.Serialize(storedPurchases);
+                PurchaseList.Text = JsonSerializer.Serialize(result);
         }
 
         private async void OnPurchaseSubscriptionClicked(

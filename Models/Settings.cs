@@ -19,5 +19,7 @@
         public string Subscription { get; set; }
 
         public string SubscriptionNR { get; set; }
+
+        public string FreeProductId { get; set; }
     }
 }
