@@ -1,4 +1,5 @@
 ﻿using Auth0.OidcClient;
+using MetroLog.MicrosoftExtensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
@@ -34,6 +35,10 @@ namespace TravelBlog
             builder.Configuration.AddConfiguration(config);
 
             var settings = config.GetRequiredSection("Settings").Get<Settings>();
+
+            builder.Logging.AddTraceLogger(_ => { });
+            builder.Logging.AddInMemoryLogger(_ => { });
+            builder.Logging.AddStreamingFileLogger(_ => { });
 
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton(settings);

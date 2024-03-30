@@ -1,4 +1,6 @@
-﻿namespace TravelBlog
+﻿using MetroLog.Maui;
+
+namespace TravelBlog
 {
     public partial class App : Application
     {
@@ -7,6 +9,10 @@
             InitializeComponent();
 
             MainPage = page;
+
+            LogController.InitializeNavigation(
+                page => MainPage!.Navigation.PushModalAsync(page),
+                () => MainPage!.Navigation.PopModalAsync());
         }
     }
 }

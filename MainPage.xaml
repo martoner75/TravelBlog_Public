@@ -89,18 +89,29 @@
                         Text="Log Out"
                         SemanticProperties.Hint="Click to log out"
                         Clicked="OnLogoutClicked"
-                    BackgroundColor="DarkOliveGreen"
-                    TextColor="White"
+                        BackgroundColor="DarkOliveGreen"
+                        TextColor="White"
                         HeightRequest="50"
                         HorizontalOptions="Center" />
+
+                    <Label 
+                        x:Name="Logs"
+                        Text="Shake your device to send logs to Admin"
+                        TextColor="Black"
+                        SemanticProperties.HeadingLevel="Level2"
+                        SemanticProperties.Description="Shake your device to send logs to Admin"
+                        FontSize="12"
+                        HeightRequest="50"
+                        HorizontalOptions="Center" />
+                    <Switch IsToggled="{Binding IsShakeEnabled}" />
 
                     <Button 
                         x:Name="SyncPurchaseHistoryBtn"
                         Text="Sync purchases"
                         SemanticProperties.Hint="Click to sync purchases"
                         Clicked="OnSyncPurchaseHistoryClicked"
-                    BackgroundColor="DarkOliveGreen"
-                    TextColor="White"
+                        BackgroundColor="DarkOliveGreen"
+                        TextColor="White"
                         HeightRequest="50"
                         HorizontalOptions="Center" />
 
@@ -109,8 +120,8 @@
                         Text="Subscription Consumable"
                         SemanticProperties.Hint="Click to purchase"
                         Clicked="OnPurchaseSubscriptionClicked"
-                    BackgroundColor="DarkOliveGreen"
-                    TextColor="White"
+                        BackgroundColor="DarkOliveGreen"
+                        TextColor="White"
                         HeightRequest="50"
                         HorizontalOptions="Center" />
 
@@ -119,8 +130,8 @@
                         Text="Subscription Not Renewable"
                         SemanticProperties.Hint="Click to purchase"
                         Clicked="OnPurchaseSubscriptionNRClicked"
-                    BackgroundColor="DarkOliveGreen"
-                    TextColor="White"
+                        BackgroundColor="DarkOliveGreen"
+                        TextColor="White"
                         HeightRequest="50"
                         HorizontalOptions="Center" />
 
@@ -129,8 +140,8 @@
                         Text="IAP Consumable"
                         SemanticProperties.Hint="Click to purchase"
                         Clicked="OnPurchaseConsumableClicked"
-                    BackgroundColor="DarkOliveGreen"
-                    TextColor="White"
+                        BackgroundColor="DarkOliveGreen"
+                        TextColor="White"
                         HeightRequest="50"
                         HorizontalOptions="Center" />
 
@@ -139,15 +150,10 @@
                         Text="IAP Non Consumable"
                         SemanticProperties.Hint="Click to purchase"
                         Clicked="OnPurchaseNonConsumableClicked"
-                    BackgroundColor="DarkOliveGreen"
-                    TextColor="White"
+                        BackgroundColor="DarkOliveGreen"
+                        TextColor="White"
                         HeightRequest="50"
                         HorizontalOptions="Center" />
-
-                    <Editor x:Name="PurchaseList"
-                    BackgroundColor="DarkOliveGreen"
-                        Placeholder="Your purchase list"
-                        HeightRequest="250" />
                 </VerticalStackLayout>
             </StackLayout>
         </VerticalStackLayout>

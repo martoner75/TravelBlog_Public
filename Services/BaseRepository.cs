@@ -15,28 +15,15 @@ namespace TravelBlog.Services
 
             _repository = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
 
-            try
-            {
-                await _repository.CreateTableAsync<PurchaseDBModel>();
-                await _repository.CreateTableAsync<PurchaseDBModelDetail>();
-            }
-            catch (Exception ex)
-            {
-                await Task.FromResult(ex);
-            }
+            await _repository.CreateTableAsync<PurchaseDBModel>();
+            await _repository.CreateTableAsync<PurchaseDBModelDetail>();
         }
 
         public async Task<List<PurchaseDBModel>> GetItemsAsync()
         {
-            try
-            {
-                await Init();
+            await Init();
 
-                return await _repository.Table<PurchaseDBModel>().ToListAsync();
-            }
-            catch (Exception ex) { 
-                return new List<PurchaseDBModel>();
-            }
+            return await _repository.Table<PurchaseDBModel>().ToListAsync();
         }
 
         public async Task<PurchaseDBModel> GetItemAsync(string productId)
@@ -64,38 +51,24 @@ namespace TravelBlog.Services
         {
             await Init();
 
-            try
-            {
-                if(await GetItemAsync(item.ProductId) != null)
-                    await _repository.DeleteAsync(item);
+            if(await GetItemAsync(item.ProductId) != null)
+                await _repository.DeleteAsync(item);
 
-                await _repository.InsertAsync(item);
+            await _repository.InsertAsync(item);
 
-                return (await GetItemAsync(item.ProductId)).Id;
-            }
-            catch (Exception ex)
-            {
-                return -1;
-            }
+            return (await GetItemAsync(item.ProductId)).Id;
         }
 
         public async Task<int> SaveItemDetailAsync(PurchaseDBModelDetail item)
         {
             await Init();
 
-            try
-            {
-                if (await GetItemDetailsAsync(item.Id) != null)
-                    await _repository.DeleteAsync(item);
+            if (await GetItemDetailsAsync(item.Id) != null)
+                await _repository.DeleteAsync(item);
 
-                await _repository.InsertAsync(item);
+            await _repository.InsertAsync(item);
 
-                return (await GetItemDetailsAsync(item.Id)).Id;
-            }
-            catch (Exception ex)
-            {
-                return -1;
-            }
+            return (await GetItemDetailsAsync(item.Id)).Id;
         }
 
         public async Task<int> DeleteItemAsync(PurchaseDBModel item)
@@ -107,16 +80,9 @@ namespace TravelBlog.Services
 
         public async Task<List<PurchaseDBModelDetail>> GetItemsDetailsAsync()
         {
-            try
-            {
-                await Init();
+            await Init();
 
-                return await _repository.Table<PurchaseDBModelDetail>().ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                return new List<PurchaseDBModelDetail>();
-            }
+            return await _repository.Table<PurchaseDBModelDetail>().ToListAsync();
         }
     }
 }

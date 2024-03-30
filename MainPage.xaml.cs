@@ -1,4 +1,6 @@
 ﻿using IdentityModel.OidcClient.Browser;
+using MetroLog.Maui;
+using Microsoft.Extensions.Logging;
 using Plugin.InAppBilling;
 using System.Text.Json;
 using TravelBlog.Models;
@@ -16,14 +18,18 @@ namespace TravelBlog
         private readonly string _appPackage = AppInfo.Current.PackageName;
         private readonly string _appVersion = AppInfo.Current.VersionString;
         private readonly string _appBuild = AppInfo.Current.BuildString;
+        private readonly ILogger<MainPage> _logger;
 
         public MainPage(
+            ILogger<MainPage> logger,
             IAuthenticationService authenticationService,
             IInAppPurchaseService inAppPurchaseService,
             IRepositoryService repositoryService,
             Settings settings)
         {
             InitializeComponent();
+            BindingContext = new LogController();
+            _logger = logger;
             _authenticationService = authenticationService;
             _inAppPurchaseService = inAppPurchaseService;
             _repositoryService = repositoryService;
@@ -75,6 +81,8 @@ namespace TravelBlog
             object sender,
             EventArgs e)
         {
+            _logger.LogInformation($"{nameof(OnSyncPurchaseHistoryClicked)}> Retrieving the list of purchases");
+
             var purchasesFromStore = await _inAppPurchaseService.GetAllPurchasesAsync();
 
             if (purchasesFromStore.Any())
@@ -84,8 +92,6 @@ namespace TravelBlog
 
             if (!result.Any())
                 await DisplayAlert("Information", "No purchases so far!", "OK");
-            else
-                PurchaseList.Text += $"{JsonSerializer.Serialize(result)}\r\n";
         }
 
         private async void OnPurchaseSubscriptionClicked(

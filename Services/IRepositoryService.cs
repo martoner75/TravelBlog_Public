@@ -6,6 +6,6 @@ namespace TravelBlog.Services
     {
         Task StorePurchases(IEnumerable<PurchaseModel> purchasesFromStore);
 
-        Task<IEnumerable<PurchaseDBModelResponse>> GetStorePurchases();
+        Task<IEnumerable<PurchaseDBModelResponse>> GetStoredPurchases();
     }
 }
