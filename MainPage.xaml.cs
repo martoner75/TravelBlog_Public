@@ -88,7 +88,7 @@ namespace TravelBlog
             if (purchasesFromStore.Any())
                 await _repositoryService.StorePurchases(purchasesFromStore);
 
-            var result = await _repositoryService.GetStorePurchases();
+            var result = await _repositoryService.GetStoredPurchases();
 
             if (!result.Any())
                 await DisplayAlert("Information", "No purchases so far!", "OK");

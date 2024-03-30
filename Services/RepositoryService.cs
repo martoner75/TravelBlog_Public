@@ -48,7 +48,7 @@ namespace TravelBlog.Services
             }
             catch(Exception ex)
             {
-                _logger.LogInformation($"{nameof(RepositoryService)} > {nameof(StorePurchases)}: Error while storing purchases on the local archive {ex.Message} {ex.StackTrace}");
+                _logger.LogError($"{nameof(RepositoryService)} > {nameof(StorePurchases)}: Error while storing purchases on the local archive {ex.Message} {ex.StackTrace}");
             }
         }
 
@@ -71,7 +71,7 @@ namespace TravelBlog.Services
             }
             catch (Exception ex)
             {
-                _logger.LogInformation($"{nameof(RepositoryService)} > {nameof(GetStoredPurchases)}: Error while retriving purchases from the local archive {ex.Message} {ex.StackTrace}");
+                _logger.LogError($"{nameof(RepositoryService)} > {nameof(GetStoredPurchases)}: Error while retriving purchases from the local archive {ex.Message} {ex.StackTrace}");
             }
 
             return result;
