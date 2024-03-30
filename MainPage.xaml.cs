@@ -1,4 +1,5 @@
-﻿using IdentityModel.OidcClient.Browser;
+﻿using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
 using MetroLog.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.InAppBilling;
@@ -92,6 +93,8 @@ namespace TravelBlog
 
             if (!result.Any())
                 await DisplayAlert("Information", "No purchases so far!", "OK");
+
+            await DisplayAlert("Information", "Purchases are now synced", "OK");
         }
 
         private async void OnPurchaseSubscriptionClicked(

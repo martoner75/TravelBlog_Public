@@ -100,7 +100,7 @@ namespace TravelBlog.Services
 
             try
             {
-                _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(PurchaseAsync)}: Loading purchase by Product Id");
+                _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(PurchaseAsync)}: Purchasing {productId}: {type}");
 
                 var connected = await _billing.ConnectAsync();
 

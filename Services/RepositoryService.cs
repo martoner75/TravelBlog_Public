@@ -74,6 +74,8 @@ namespace TravelBlog.Services
                 _logger.LogError($"{nameof(RepositoryService)} > {nameof(GetStoredPurchases)}: Error while retriving purchases from the local archive {ex.Message} {ex.StackTrace}");
             }
 
+            _logger.LogInformation($"{nameof(RepositoryService)} > {nameof(GetStoredPurchases)}: Retriving purchases from the local archive completed");
+
             return result;
         }
     }
