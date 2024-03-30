@@ -40,64 +40,64 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
-	  <CodesignKey>Apple Distribution: Rosario Martone (L4CHLLNW77)</CodesignKey>
-	  <CodesignProvision>it.rossdev.travelblog Distribution</CodesignProvision>
+	  <CodesignKey>Apple Development: Created via API (57GR835SAN)</CodesignKey>
+	  <CodesignProvision>VS: it.rossdev.travelblog Development</CodesignProvision>
 	  <ProvisioningType>manual</ProvisioningType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>it.rossdev.travelblog</ApplicationId>
-	  <ApplicationDisplayVersion>1.1.22</ApplicationDisplayVersion>
-	  <ApplicationVersion>22</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.1.23</ApplicationDisplayVersion>
+	  <ApplicationVersion>23</ApplicationVersion>
 	  <IsPublishable>False</IsPublishable>
 	</PropertyGroup>
 

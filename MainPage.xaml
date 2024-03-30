@@ -101,9 +101,9 @@
                         SemanticProperties.HeadingLevel="Level2"
                         SemanticProperties.Description="Shake your device to send logs to Admin"
                         FontSize="12"
-                        HeightRequest="50"
                         HorizontalOptions="Center" />
-                    <Switch IsToggled="{Binding IsShakeEnabled}" />
+                    
+                    <Switch HorizontalOptions="CenterAndExpand" IsToggled="{Binding IsShakeEnabled}" HeightRequest="50" />
 
                     <Button 
                         x:Name="SyncPurchaseHistoryBtn"
