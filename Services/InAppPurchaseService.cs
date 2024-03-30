@@ -117,12 +117,16 @@ namespace TravelBlog.Services
 
                 if (purchase == null)
                     purchaseResult.Errors.ToList().Add("There was an error while purchasing this product");
-                else if (purchase.State == Plugin.InAppBilling.PurchaseState.Purchased)
+                else if (purchase.State == PurchaseState.Purchased)
                 {
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(PurchaseAsync)}: Finalisying purchase");
                     var ack = await CrossInAppBilling.Current.FinalizePurchaseAsync(purchase.TransactionIdentifier);
 
                     foreach (var item in ack)
+                    {
+                        _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(PurchaseAsync)}: Acknowledging purchase for {item.Id}");
                         purchaseResult.Acknowledgements.ToList().Add(new Acknowledgement() { ProductId = item.Id, Success = item.Success });
+                    }
                 }
 
                 purchaseResult.PurchaseItems = await _billing.GetPurchasesAsync(type);
