@@ -101,44 +101,36 @@ namespace TravelBlog
             object sender,
             EventArgs e)
         {
-            var result = await _inAppPurchaseService.PurchaseAsync(
+            await _inAppPurchaseService.PurchaseAsync(
                 ItemType.Subscription,
                 _settings.Subscription);
-
-            await DisplayAlert("Information", JsonSerializer.Serialize(result), "OK");
         }
 
         private async void OnPurchaseSubscriptionNRClicked(
             object sender,
             EventArgs e)
         {
-            var result = await _inAppPurchaseService.PurchaseAsync(
+            await _inAppPurchaseService.PurchaseAsync(
                 ItemType.Subscription,
                 _settings.SubscriptionNR);
-
-            await DisplayAlert("Information", JsonSerializer.Serialize(result), "OK");
         }
 
         private async void OnPurchaseConsumableClicked(
             object sender,
             EventArgs e)
         {
-            var result = await _inAppPurchaseService.PurchaseAsync(
+            await _inAppPurchaseService.PurchaseAsync(
                 ItemType.InAppPurchaseConsumable,
                 _settings.ConsumableIAP);
-
-            await DisplayAlert("Information", JsonSerializer.Serialize(result), "OK");
         }
 
         private async void OnPurchaseNonConsumableClicked(
             object sender,
             EventArgs e)
         {
-            var result = await _inAppPurchaseService.PurchaseAsync(
+            await _inAppPurchaseService.PurchaseAsync(
                 ItemType.InAppPurchase,
                 _settings.NonConsumableIAP);
-
-            await DisplayAlert("Information", JsonSerializer.Serialize(result), "OK");
         }
     }
 }
