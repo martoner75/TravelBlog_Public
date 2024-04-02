@@ -25,25 +25,28 @@ namespace TravelBlog.Services
 
                 if (!connected)
                     purchaseResult.Add(new PurchaseModel(string.Empty, ItemType.Subscription) { Errors = [$"There was an error while connecting to the store"] });
+                else
+                {
+                    var subscriptions = (await _billing.GetPurchasesAsync(ItemType.Subscription));
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: All subscriptions: {JsonSerializer.Serialize(subscriptions)}");
 
-                _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: All subscriptions: {JsonSerializer.Serialize(await _billing.GetPurchasesAsync(ItemType.Subscription))}");
+                    var subscriptionsR = subscriptions.Where(x => x.ProductId.Equals(_settings.Subscription));
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: Subscriptions R loaded: {JsonSerializer.Serialize(subscriptionsR)}");
 
-                var subscriptions = (await _billing.GetPurchasesAsync(ItemType.Subscription)).Where(x=>x.ProductId.Equals(_settings.Subscription));
-                _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: Subscriptions loaded: {JsonSerializer.Serialize(subscriptions)}");
+                    var subscriptionsNR = subscriptions.Where(x => x.ProductId.Equals(_settings.SubscriptionNR));
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: Subscriptions NR loaded: {JsonSerializer.Serialize(subscriptionsNR)}");
 
-                var subscriptionsNR = (await _billing.GetPurchasesAsync(ItemType.Subscription)).Where(x => x.ProductId.Equals(_settings.SubscriptionNR));
-                _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: Subscriptions NR loaded: {JsonSerializer.Serialize(subscriptionsNR)}");
+                    var inAppPurchaseConsumable = (await _billing.GetPurchasesAsync(ItemType.InAppPurchaseConsumable));
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: IAP Consumable loaded: {JsonSerializer.Serialize(inAppPurchaseConsumable)}");
 
-                var inAppPurchaseConsumable = (await _billing.GetPurchasesAsync(ItemType.InAppPurchaseConsumable));
-                _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: IAP Consumable loaded: {JsonSerializer.Serialize(inAppPurchaseConsumable)}");
+                    var inAppPurchase = (await _billing.GetPurchasesAsync(ItemType.InAppPurchase));
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: IAP loaded: {JsonSerializer.Serialize(inAppPurchase)}");
 
-                var inAppPurchase = (await _billing.GetPurchasesAsync(ItemType.InAppPurchase));
-                _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: IAP loaded: {JsonSerializer.Serialize(inAppPurchase)}");
-
-                purchaseResult.Add(new PurchaseModel(_settings.Subscription, ItemType.Subscription) { PurchaseItems = subscriptions });
-                purchaseResult.Add(new PurchaseModel(_settings.SubscriptionNR, ItemType.Subscription) { PurchaseItems = subscriptionsNR });
-                purchaseResult.Add(new PurchaseModel(_settings.ConsumableIAP, ItemType.InAppPurchaseConsumable) { PurchaseItems = inAppPurchaseConsumable });
-                purchaseResult.Add(new PurchaseModel(_settings.NonConsumableIAP, ItemType.InAppPurchase) { PurchaseItems = inAppPurchase });
+                    purchaseResult.Add(new PurchaseModel(_settings.Subscription, ItemType.Subscription) { PurchaseItems = subscriptionsR });
+                    purchaseResult.Add(new PurchaseModel(_settings.SubscriptionNR, ItemType.Subscription) { PurchaseItems = subscriptionsNR });
+                    purchaseResult.Add(new PurchaseModel(_settings.ConsumableIAP, ItemType.InAppPurchaseConsumable) { PurchaseItems = inAppPurchaseConsumable });
+                    purchaseResult.Add(new PurchaseModel(_settings.NonConsumableIAP, ItemType.InAppPurchase) { PurchaseItems = inAppPurchase });
+                }
             }
             catch (Exception ex)
             {
