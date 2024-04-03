@@ -27,6 +27,14 @@ namespace TravelBlog.Services
                     purchaseResult.Add(new PurchaseModel(string.Empty, ItemType.Subscription) { Errors = [$"There was an error while connecting to the store"] });
                 else
                 {
+                    var subscription = await _billing.GetProductInfoAsync(ItemType.Subscription, "TravelBlog_S", "tb_nr_s");
+                    var iapurchaseC = await _billing.GetProductInfoAsync(ItemType.InAppPurchaseConsumable, "TravelBlog");
+                    var iapurchaseNC = await _billing.GetProductInfoAsync(ItemType.InAppPurchase, "TravelBlog_c_iap");
+
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: All subscriptions products: {JsonSerializer.Serialize(subscription)}");
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: All IAPc products: {JsonSerializer.Serialize(iapurchaseC)}");
+                    _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: All IAPnc products: {JsonSerializer.Serialize(iapurchaseNC)}");
+
                     var subscriptions = (await _billing.GetPurchasesAsync(ItemType.Subscription));
                     _logger.LogInformation($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: All subscriptions: {JsonSerializer.Serialize(subscriptions)}");
 
@@ -51,7 +59,6 @@ namespace TravelBlog.Services
             catch (Exception ex)
             {
                 _logger.LogError($"{nameof(InAppPurchaseService)} > {nameof(GetAllPurchasesAsync)}: Error while loading purchases {ex.Message}: {ex.StackTrace}");
-                purchaseResult.Add(new PurchaseModel(string.Empty, ItemType.Subscription) { Errors = new List<string> { $"There was an error while retrieving purchases: {ex.Message} {ex.StackTrace}" } });
             }
             finally
             {
